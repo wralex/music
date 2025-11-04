@@ -1,0 +1,38 @@
+{
+  "name": "music",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "start": "dist/index.js",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wralex/music.git"
+  },
+  "author": "William Alexander",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wralex/music/issues"
+  },
+  "homepage": "https://github.com/wralex/music#readme",
+  "dependencies": {
+    "abcjs": "^6.5.2",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3",
+    "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "@types/bootstrap": "^5.2.10",
+    "@types/express": "^5.0.5",
+    "@types/express-handlebars": "^5.3.1",
+    "@types/jquery": "^3.5.33",
+    "@types/node": "^24.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
