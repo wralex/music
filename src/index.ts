@@ -1,7 +1,7 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
-
 import path from 'path';
+import * as helpers from './lib/helpers';
 
 const app = express();
 const port: number = 3000;
