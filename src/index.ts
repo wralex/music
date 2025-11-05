@@ -5,11 +5,11 @@ import fs from "fs";
 import marked from "marked";
 import { loadFront } from "yaml-front-matter";
 import _ from "lodash";
-import ABCJS from "abcjs";
 
 import * as helpers from "./lib/helpers";
 
 const port: number = 3000;
+
 const filteredLoDashFunctions = Object.entries(_)
   .filter(([key, value]) => typeof value === "function" && key !== "each")
   .reduce((acc, [key, value]) => {
@@ -40,32 +40,41 @@ const localLibs = "/assets/libs";
 const nodeMods = path.join(__dirname, "../node_modules");
 
 app.use("/", express.static(path.join(__dirname, "../public")));
+
 app.use(
   `${localLibs}/bootstrap/css`,
   express.static(path.join(nodeMods, "bootstrap/dist/css"))
 );
+
 app.use(
   `${localLibs}/bootstrap-icons`,
   express.static(path.join(nodeMods, "bootstrap-icons/font"))
 );
+
 app.use(
   `${localLibs}/bootstrap/js`,
   express.static(path.join(nodeMods, "bootstrap/dist/js"))
 );
+
 app.use(
   `${localLibs}/jquery`,
   express.static(path.join(nodeMods, "jquery/dist"))
 );
+
 app.use(
   `${localLibs}/abcjs/js`,
   express.static(path.join(nodeMods, "abcjs/dist"))
 );
+
 app.use(`${localLibs}/abcjs/css`, express.static(path.join(nodeMods, "abcjs")));
+
 app.use(`${localLibs}/lodash`, express.static(path.join(nodeMods, "lodash")));
+
 app.use(
   `${localLibs}/moment`,
   express.static(path.join(nodeMods, "moment/min"))
 );
+
 app.use(
   `${localLibs}/moment-timezone`,
   express.static(path.join(nodeMods, "moment-timezone/builds"))
@@ -74,7 +83,6 @@ app.use(
 app.get("/", (_, res) => {
   res.render("home");
 });
-
 
 app.get("/ssb", (_, res) => {
   const cooleys = `X:1
