@@ -1,0 +1,12 @@
+.abcjs-slur {
+    stroke-width: 2;
+    stroke: red;
+}
+
+.abcjs-lyric {
+    fill: none;
+}
+
+label {
+    display: block;
+}
