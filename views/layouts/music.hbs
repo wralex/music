@@ -8,7 +8,7 @@
     {{> page/styles}}
     <link rel="stylesheet" href="/assets/libs/abcjs/css/abcjs-audio.css">
     <script src="/assets/libs/abcjs/js/abcjs-basic-min.js"></script>
-    
+    <script src="/assets/scripts/music.js"></script>
     <style>
         .abcjs-inline-audio {
             max-width: 770px;
@@ -22,27 +22,38 @@
         {{{body}}}
         <div id="notation"></div>
         <div id="audio"></div>
+        <button id="activate-audio" class="btn btn-info">Activate Audio</button>
+        <button id="start" class="btn btn-primary">Start</button>
     </main>
     {{> page/footer}}
     {{> page/scripts}}
     <script>
-        var song = `{{{music}}}`;
+        const song = `{{{music}}}`;
+
+        const cursorControl = new CursorControl("#notation");
 
         $(() => {
-            onMidi();
-        });
+            load(song, "notation");
 
-        function onMidi() {
-            if (ABCJS.synth.supportsAudio()) {
-                let visualObj = ABCJS.renderAbc('notation', song)[0];
-                let synthControl = new ABCJS.synth.SynthController();
-                synthControl.load("#audio", null, {displayRestart: true, displayPlay: true, displayProgress: true});
-                synthControl.setTune(visualObj, false);
-            } else {
-                ABCJS.renderAbc("notation", song);
-                document.querySelector("#audio").innerHTML = "<div class='audio-error'>Audio is not supported in this browser.</div>";
+            $("#start").on("click", startTimer);
+            $("#activate-audio").on("click", activate("audio", "abcjs-inline-audio"));
+
+            function onEvent(ev) {
+                if (ev)
+                    cursorControl.onEvent(ev);
+                else
+                    cursorControl.onFinished();
             }
-        }
+
+            function startTimer() {
+                cursorControl.onStart();
+
+                var timingCallbacks = new ABCJS.TimingCallbacks(visualObj[0], {
+                    eventCallback: onEvent
+                });
+                timingCallbacks.start();
+            }
+        });
 
     </script>
 </body>
